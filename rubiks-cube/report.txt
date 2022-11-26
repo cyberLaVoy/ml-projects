@@ -1,0 +1,29 @@
+
+My current model is set up as follows:
+
+RandomForestClassifier(n_estimators=75, criterion="entropy")
+Setting the number of estimators to values does help, a small amount, with the scoring results. But the help in the scoring results is not significant enough to be worth the extra time in computation. Also note that entropy was chosen as the criterion, instead of gini, since the scoring results were simply much better.
+
+
+Cross validation results:
+
+Accuracy scores:
+[0.94058347 0.94333282 0.94279823 0.93744749 0.93721836 0.94132926
+ 0.94087089 0.93872718 0.93895638 0.94452934 0.93695552]
+Confusion matrix:
+[[16087     0     0     0     0     0     0     0     0]
+ [    0 16004     0     0     0     0     0     0     0]
+ [    0     0 16047     0     0     0     0     0     0]
+ [    0     0     0 15883     0     0     0     0     0]
+ [    0     0     3     7 15208   587   164    14    18]
+ [    0     1     0    62   283 13180  1811   631    48]
+ [    0     0     2     0    89    29 13129  1853   807]
+ [    0     1     0     4     0    45    44 13910  2039]
+ [    0     0     0     0     2     0    42    18 15948]]
+Recall Score: 0.94025
+Precision Score: 0.94025
+
+This cross validation was done on 11 seperate folds. Samples in underrepresented levels have been randomly duplicated, with replacement, to match the number of samples in higher levels. The full data was then shuffled, and split into an %80 train group, and %20 test group. Cross validation seen here was done on the train group. Note that the model seems to have difficulty classifying configurations in the higher, more complex, levels. But the model does very well on the lower levels.
+
+
+Other models that I tried were Scikit Learn's SGDClassifier, and AdaBoostClassifier with a DecisionTreeClassifier as the base estimator. Neither of which seemed to show any promise on the final results. I may try some nueral network variations, but the results with the RandomForestClassifier seem to be sufficient.

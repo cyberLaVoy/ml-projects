@@ -1,0 +1,21 @@
+Normal classes of users:
+0 - student access
+1 - administrative access
+2 - automated jobs
+
+
+K_means Inertia:
+num_samples = ~278k
+inertias = [246499.34348642532, 130102.87406364144, 74128.60807919108, 62001.91050148643, 55384.389463364794, 49850.99653773715]
+
+Code:
+inertias = []
+for k in range(1, 7):
+    pipeline = createPipline(k)
+    pipeline.fit(df)
+    inertia = pipeline["Model"].inertia_
+    inertias.append(inertia)
+print(inertias)
+
+Summary:
+It appears that the inertia elbow is when k = 3.
